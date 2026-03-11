@@ -1,0 +1,21 @@
+# 自动识别文本并做规范化
+* text=auto
+
+# 强制常见源码文件以 LF 结尾（工作区与仓库都用 LF）
+*.js   text eol=lf
+*.ts   text eol=lf
+*.tsx  text eol=lf
+*.jsx  text eol=lf
+*.json text eol=lf
+*.css  text eol=lf
+*.scss text eol=lf
+*.md   text eol=lf
+*.yml  text eol=lf
+*.yaml text eol=lf
+
+# 二进制文件不要改行
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.pdf  binary
