@@ -24,7 +24,6 @@ const loadData = async () => {
         totalPage.value = res.data.totalPages
         console.log(phones.value)
     }
-
 }
 
 onMounted(() => {
@@ -49,25 +48,41 @@ const handleSearch = () => {
   page.value = 0
   loadData()
 }
+
+const handlePageChange = (val) => {
+  page.value = val - 1   // ❗ 因为后端从0开始
+  loadData()
+}
 </script>
 
 <template>
   <h2>手机查询</h2>
-  <input v-model="phoneName" placeholder="输入手机品牌名称"/>
-  <button @click="handleSearch">搜索</button>
+  <el-input v-model="phoneName" placeholder="输入手机品牌名称" style="width: 200px; margin-right: 10px;"/>
+  <!-- <button @click="handleSearch">搜索</button> -->
+  <el-button type="primary" @click="handleSearch">
+    検索
+  </el-button>
   <hr>
-  
-  <ul>
-    <li v-for="p in phones" :key = "p.id">
-      {{ p.model }} - {{ p.price }}
-    </li>
-  </ul>
 
-  <div style="margin-top: 20px;">
+  <el-table :data="phones" style="width: 100%; margin-top: 20px;">
+    <el-table-column prop="model" label="型号"/>
+    <el-table-column prop="price" label="价格"/>
+  </el-table>
+
+  <!-- <div style="margin-top: 20px;">
     <button @click="prevPage()":disabled="page===0">上一页</button>
     <span>第{{ page + 1 }}页</span>
     <button @click="nextPage()":disabled="page + 1 >= totalPage">下一页</button>
-  </div>
+  </div> -->
+  <el-pagination 
+    size="small"
+    background
+    layout="prev,pager,next"
+    :current-page="page + 1"
+    :page-size="size"
+    :total="size * totalPage"
+    @current-change="handlePageChange"
+  />
 </template>
 
 <style scoped>
