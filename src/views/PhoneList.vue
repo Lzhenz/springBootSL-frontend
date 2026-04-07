@@ -32,6 +32,7 @@ const loadData = async () => {
       console.log(phones.value)
     }
   }catch(e){
+    alert("search error: " + e)
     console.error(e)
   }finally{
     loading.value = false
@@ -44,7 +45,7 @@ function sleep(ms) {
 }
 
 onMounted(() => {
-  loadData()
+  // loadData()
 })
 
 const nextPage = () => {
@@ -70,10 +71,18 @@ const handlePageChange = (val) => {
   page.value = val - 1   // ❗ 因为后端从0开始
   loadData()
 }
+
+const gotoNextPage = () =>{
+  // alert("goto next page")
+  location.href = "/src/views/oldSearch.html"
+}
+
 </script>
 
 <template>
   <h2>手机查询</h2>
+  <el-button type="primary" @click="gotoNextPage" style="width: 100%; margin-bottom: 10px;">OLD</el-button>
+  <br>
   <el-input v-model="phoneName" placeholder="输入手机品牌名称" style="width: 200px; margin-right: 10px;"/>
   <!-- <button @click="handleSearch">搜索</button> -->
   <el-button type="primary" @click="handleSearch">
