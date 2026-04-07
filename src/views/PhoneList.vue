@@ -1,4 +1,5 @@
 <script setup>
+import { fa } from 'element-plus/es/locale/index.mjs';
 import { getPhones } from '../api/phone';
 
 import { onMounted, ref } from 'vue';
@@ -11,8 +12,13 @@ const phoneName = ref("")
 const page = ref(0)
 const size = 2
 const totalPage = ref(0)
+const loading = ref(false)
 
 const loadData = async () => {
+  // 防止重复请求
+  // if(loading) return
+  try{
+    loading.value = true
     const res = await getPhones({
         model: phoneName.value,
         page: page.value,
@@ -20,10 +26,21 @@ const loadData = async () => {
     })
     console.log(res)
     if (res.status === 200){
-        phones.value = res.data.content
-        totalPage.value = res.data.totalPages
-        console.log(phones.value)
+      // await sleep(1000)
+      phones.value = res.data.content
+      totalPage.value = res.data.totalPages
+      console.log(phones.value)
     }
+  }catch(e){
+    console.error(e)
+  }finally{
+    loading.value = false
+  }
+
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms))
 }
 
 onMounted(() => {
@@ -63,7 +80,8 @@ const handlePageChange = (val) => {
     検索
   </el-button>
   <hr>
-
+  <div v-if="loading"> loading...</div>
+  <div v-else-if="phones.length === 0">暂无数据</div>
   <el-table :data="phones" style="width: 100%; margin-top: 20px;">
     <el-table-column prop="model" label="型号"/>
     <el-table-column prop="price" label="价格"/>
