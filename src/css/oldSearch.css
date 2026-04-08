@@ -1,0 +1,79 @@
+body{
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #1a1919;
+}
+
+/* 同时进行Flex */
+.header{
+    background: #333;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav a{
+    color: wheat;
+    margin-left: 20px;
+    text-decoration: none;
+}
+
+.banner{
+    background: linear-gradient(120deg, #232227, #ecba34);
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.container{
+    width: 80%;
+    margin: 30px auto;
+}
+
+.card-list{
+    display: flex;
+    gap: 20px;
+}
+
+.card{
+    background: white;
+    flex: 1;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px, rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.action{
+    text-align: center;
+    margin: 10px 0;
+}
+
+.btn{
+    background: #ecba34;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 2px;
+}
+
+.footer{
+    background: #ecba34;
+    color: #232227;
+    padding: 20px;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
